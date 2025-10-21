@@ -113,19 +113,15 @@
     height: 340px;
     border-radius: 50%;
     background: conic-gradient(
-      #f3c66b 0deg 60deg,
-      #e59e6b 60deg 120deg,
-      #027014 120deg 180deg,
-      #d7a7ff 180deg 240deg,  
-      #8ad2ff 240deg 300deg,
-      #a717ac 300deg 360deg
+      #f3c66b 0deg 90deg,
+      #e59e6b 90deg 180deg,
+      #027014 180deg 270deg,
+      #8d5353 270deg 360deg
     );
     position: relative;
     transition: transform 5s cubic-bezier(.14,.9,.36,1);
     box-shadow: inset 0 8px 36px rgba(0,0,0,0.35), 0 18px 40px rgba(0,0,0,0.6);
     user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
   }
   /* arrow pointer — сверху */
   .wheelPointer {
@@ -859,11 +855,9 @@
 
   // wheel labels and spin logic
   const labels = [
-    'Ничего',
     'Как дела?',
     'Привет!',
     '2 монеты',
-    'Ничего',
     'Проверь директорию /secret/secret.html Вдруг там что-то интересное?'
   ];
   const segmentCount = labels.length;
