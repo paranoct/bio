@@ -663,6 +663,17 @@
     background: rgba(64,115,129,0.8);
     color: #fff;
   }
+  .aizen-hypertext a {
+    text-decoration: none;
+    color: inherit;
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+  }
+  .aizen-hypertext a:hover {
+    transform: translateY(-4px);
+    background: rgba(64,116,130,0.07);
+    color: var(--soft-blue);
+    text-decoration: underline;
+  }
 
 </style>
 </head>
@@ -735,7 +746,8 @@
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-          <div style="font-size:14px;opacity:0.8;margin-right:20px">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</div>
+          <div class="aizen-hypertext" style="font-size:14px;opacity:0.8;margin-right:20px"><a href="aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
+            Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</a></div>
           <!-- мета перемещена в card-footer -->
         </div>
       </section>
@@ -1229,7 +1241,13 @@
       { title: 'KSB Music - Баратрум', src: 'bara.mp3', duration: null },
       { title: 'KSB Music - Я вытащу тебя со дна', src: 'so_dna.mp3', duration: null },
       { title: 'KSB Music - На урсе', src: 'na_urse.mp3', duration: null },
-      { title: 'Drowning Love', src: 'edit_aizen.mp3', duration: null}
+      { title: 'Drowning Love', src: 'edit_aizen.mp3', duration: null},
+      { title: 'zxcursed, interworld - Metamarphosis 3', src: 'meta3.mp3', duration: null},
+      { title: 'Серега Пират - АМ ФП', src: 'AMFP.mp3', duration: null},
+      { title: 'Лида, Серега Пират - ЧСВ', src: 'CHSV.mp3', duration: null},
+      { title: 'Серега Пират - Тильт', src: 'TILT.mp3', duration: null},
+      { title: "Napoleon's song - Amour Plastique", src: 'napoleon.mp3', duration: null},
+      { title: 'Серега Пират - И я кричу остановите катку!', src: 'KATKA.mp3', duration: null}
     ];
     let currentTrackIndex = 0;
     let isLoop = false;
