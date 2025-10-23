@@ -228,7 +228,22 @@
 
     .wrap{position:relative;z-index:6;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px}
 
-    .card{width:100%;max-width:1000px;border-radius:16px;padding:20px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);box-shadow:0 18px 60px rgba(0,0,0,0.7);backdrop-filter:blur(var(--blur));display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start;overflow:hidden;position:relative}
+    .card{
+      width:100%;
+      max-width:1160px;
+      border-radius:16px;
+      padding:20px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow:0 18px 60px rgba(0,0,0,0.7);
+      backdrop-filter:blur(1px);
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:18px;
+      align-items:start;
+      overflow:hidden;
+      position:relative;
+    }
 
     .card::after{content:'';position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(90deg,rgba(74,139,163,0.06),rgba(74,139,163,0.14) 50%,rgba(74,139,163,0.06));-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);mask-composite:exclude;z-index:-1;animation:borderSlide 6s linear infinite}
     @keyframes borderSlide{0%{background-position:0% 50%}100%{background-position:200% 50%}}
@@ -355,16 +370,52 @@
     .music-controls{display:flex;gap:10px;align-items:center}.toggle-btn{padding:8px 12px;border-radius:10px;background:rgba(64,115,129,0.5);border:1px solid rgba(64,115,129,0.75);cursor:pointer}
     .progress{height:6px;background:rgba(255,255,255,0.03);border-radius:6px;overflow:hidden;flex:1;cursor:pointer;position:relative}.progress>i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--soft-blue),var(--deep-blue));transition:width .12s linear}
     .links{display:flex;gap:10px;align-items:center}
-    .social-link{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:var(--deep-blue-strong);cursor:pointer}
-    .social-link:hover{transform:translateY(-6px);background:rgba(64,116,130,0.07);color:var(--soft-blue)}
-    /* Discord button — выглядит и ведёт себя как .social-link */
-    .discord-btn{
-      width:40px;
+    .social-link-telegram{
+      width:140px;
+      height:40px;
+      padding: 0;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      font-family: 'Inter', sans-serif; /* Тот же шрифт, что в .nick */
+      font-weight: 800; /* Extrabold, как в нике */
+      justify-content:center;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.04);
+      color: var(--deep-blue-strong);
+      cursor:pointer;
+      transition: transform .18s ease, background .18s ease, color .18s ease;
+    }
+    .social-link-telegram:hover{transform:translateY(-6px);background:rgba(64,116,130,0.07);color:var(--soft-blue)}
+    .social-link-github{
+      text-transform: none;
+      width:125px;
       height:40px;
       padding:0;
       border-radius:10px;
       display:flex;
       align-items:center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      justify-content:center;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.04);
+      color:var(--deep-blue-strong);
+      cursor:pointer;
+      font-weight:700;
+      transition: transform .18s ease, background .18s ease, color .18s ease;
+    }
+    .social-link-github:hover{transform:translateY(-6px);background:rgba(64,116,130,0.07);color:var(--soft-blue)}
+    /* Discord button — выглядит и ведёт себя как .social-link */
+    .discord-btn{
+      width:120px;
+      height:40px;
+      padding:0;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
       justify-content:center;
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.04);
@@ -389,7 +440,21 @@
     }    .meta{font-size:14px;opacity:0.7;text-align:middle}
 
     .settings-toggle{position:fixed;right:18px;bottom:18px;z-index:9999;background:linear-gradient(180deg,var(--deep-blue),var(--soft-blue));color:#032;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(0,0,0,0.6);cursor:pointer}
-    .settings-panel{position:fixed;right:18px;bottom:86px;width:320px;background:rgba(10,12,15,0.75);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(8px);z-index:9998;display:none;flex-direction:column;gap:10px}
+    .settings-panel{
+      position:fixed;
+      right:18px;
+      bottom:86px;
+      width:320px;
+      background:rgba(10,12,15,0.05);
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.04);
+      backdrop-filter:blur(3px);
+      z-index:9998;
+      display:none;
+      flex-direction: column;
+      gap:10px;
+    }
     .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;background:rgba(0,0,0,0.7);color:#fff;padding:8px 12px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:10000}
     @media(max-width:900px){.card{grid-template-columns:1fr;padding:16px}.profile{flex-direction:row;gap:12px;align-items:center}.bio-text{text-align:left;max-width:unset}.panels{grid-template-columns:1fr}.meta{text-align:center}.lamp{display:none}}
 
@@ -447,6 +512,11 @@
     }
     .panel { padding: 14px !important; border-radius: 12px; }
 
+    .icon_text { font-size: 22px !important;
+      text-align: center !important;
+      line-height: 1.1;
+    }
+
     /* move coin & wheel inward so thumbs can reach */
     #coinCounter { right: 12px !important; bottom: 140px !important; padding:8px 10px; }
     #wheelBtn { right: 12px !important; bottom: 76px !important; width:52px; height:52px; border-radius:12px; }
@@ -477,6 +547,58 @@
     #coinCounter { right: 12px !important; bottom: 120px !important; }
     #wheelBtn { right: 12px !important; bottom: 64px !important; }
     .card { padding: 16px !important; }
+  }
+
+  /* Стили для кнопки плейлиста и списка треков */
+  .playlist-btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(64,115,129,0.5);
+    border: 1px solid rgba(64,115,129,0.75);
+    cursor: pointer;
+    color: var(--deep-blue-strong);
+    font-size: 14px;
+    transition: transform .18s ease, background .18s ease;
+  }
+  .playlist-btn:hover {
+    transform: translateY(-4px);
+    background: rgba(64,115,129,0.7);
+  }
+
+  .playlist-panel {
+    position: absolute;
+    top: 100%; /* Ниже music-controls */
+    left: 0;
+    width: 240px;
+    background: rgba(10,12,15,0.96);
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,0.04);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  }
+  .playlist-panel.open {
+    display: flex;
+  }
+  .playlist-item {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.02);
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .playlist-item:hover {
+    background: rgba(64,116,130,0.07);
+    transform: translateY(-2px);
+  }
+  .playlist-item.selected {
+    background: rgba(64,115,129,0.5);
+    font-weight: 700;
   }
 
 </style>
@@ -512,9 +634,16 @@
 
           <div class="panel">
             <h4><i class="fas fa-music"></i> Музыка</h4>
-            <div class="music-controls">
+            <div class="music-controls" style="position: relative;">
               <button class="toggle-btn" id="toggleBtn">▶</button>
-              <div>Тёмный принц - Овердоз</div>
+              <div id="currentTrackTitle">Тёмный принц - Овердоз</div>
+              <button class="playlist-btn" id="playlistBtn" title="Выбрать трек">
+                <i class="fas fa-list-ul" style="color: #000;"></i>
+              </button>
+              <!-- Панель плейлиста -->
+              <div class="playlist-panel" id="playlistPanel">
+                <!-- Треки добавляются динамически через JS -->
+              </div>
             </div>
             <div style="margin-top:10px;display:flex;align-items:center;gap:10px">
               <div class="progress" id="prog"><i></i></div>
@@ -524,19 +653,23 @@
 
             <h4 style="margin-top:18px"><i class="fas fa-link"></i> Ссылки</h4>
             <div class="links" style="margin-top:8px">
-              <a href="https://github.com/paranoct" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-              <a href="https://t.me/korben_322" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
+              <a href="https://github.com/paranoct" style="text-decoration: none;" class="social-link-github" title="GitHub">
+                <i class="fab fa-github"></i> <p>GitHub</p>
+              </a>
+              <a href="https://t.me/korben_322" style="text-decoration: none;" class="social-link-telegram" title="Telegram ">
+                <i class="fab fa-telegram"></i> <p>Telegram</p>
+            </a>
 
               <!-- DISCORD BUTTON: копирует ник "paranoct" -->
               <button id="discordBtn" class="discord-btn" title="Копировать ник в Discord"> 
-                <i class="fab fa-discord"></i>
+                <i class="fab fa-discord"></i> <p>Discord</p>
               </button>
             </div>
           </div>
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-          <div style="font-size:12px;opacity:0.8;margin-right:20px">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</div>
+          <div style="font-size:14px;opacity:0.8;margin-right:20px">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</div>
           <!-- мета перемещена в card-footer -->
         </div>
       </section>
@@ -578,7 +711,7 @@
       </div>
     </div>
   </div>
-  <!-- === /монетки и колесо === -->
+  <!-- === === /монетки и колесо === -->
 
   <div class="settings-toggle" id="settingsToggle" title="Настройки (S — снег, Space — play/pause, M — mute)">
     <i class="fas fa-cog"></i>
@@ -586,19 +719,23 @@
   <div class="settings-panel" id="settingsPanel" aria-hidden="true">
     <h4>Настройки</h4>
     <div class="setting-row">
-      <div style="width:120px;font-size:13px">Громкость</div>
+      <div style="width:240px;font-size:13px">Громкость (осторожно, громко)</div>
       <input type="range" id="volRange" class="range" min="0" max="1" step="0.01" />
-      <div id="volVal" style="width:40px;text-align:right">0.03</div>
+      <div id="volVal" style="width:40px;text-align:right">3%</div>
     </div>
     <div class="setting-row">
-      <div style="width:120px;font-size:13px">Прозрачность снега</div>
+      <div style="width:160px;font-size:13px">Прозрачность снега</div>
       <input type="range" id="snowOpacity" class="range" min="0.4" max="0.9" step="0.005" />
-      <div id="snowOpVal" style="width:40px;text-align:right">0.60</div>
+      <div id="snowOpVal" style="width:40px;text-align:right"></div>
     </div>
     <div class="setting-row">
       <div style="width:120px;font-size:13px">Плотность снега</div>
-      <input type="range" id="snowDensity" class="range" min="15" max="20" step="1" />
-      <div id="snowDenVal" style="width:40px;text-align:right">1.0x</div>
+      <input type="range" id="snowDensity" class="range" min="1" max="20" step="1" />
+      <div id="snowDenVal" style="width:40px;text-align:right"></div>
+    </div>
+    <div class="setting-row" style="display:flex;align-items:center;gap:8px">
+      <div style="flex:1;font-size:13px">Спавн монеток</div>
+      <input type="checkbox" id="spawnCoinsToggle" checked />
     </div>
     <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
       <div class="kbd">Space</div><div style="opacity:0.8">play/pause</div>
@@ -683,8 +820,14 @@
     const settingsToggle=document.getElementById('settingsToggle');const settingsPanel=document.getElementById('settingsPanel');
     settingsToggle.addEventListener('click',()=>{ const show=settingsPanel.style.display!=='flex'; settingsPanel.style.display=show?'flex':'none'; settingsPanel.setAttribute('aria-hidden',show?'false':'true'); });
 
-    const volRange=document.getElementById('volRange');const volVal=document.getElementById('volVal');volRange.value=audio.volume;volVal.textContent=Number(audio.volume).toFixed(2);
-    volRange.addEventListener('input',()=>{ audio.volume=Number(volRange.value); volVal.textContent=Number(audio.volume).toFixed(2); });
+    const volRange=document.getElementById('volRange');
+    const volVal=document.getElementById('volVal');
+    volRange.value=audio.volume;
+    volVal.textContent=Math.round((Number(audio.volume).toFixed(2)*100)) + "%";
+    volRange.addEventListener('input',()=>{ 
+      audio.volume=Number(volRange.value); 
+      volVal.textContent=Math.round((Number(audio.volume).toFixed(2)*100)) + "%"; 
+    });
 
     // SNOW settings: задаём значение сразу, чтобы снег был виден при загрузке
     const snowOpacity = document.getElementById('snowOpacity');
@@ -692,23 +835,19 @@
     // Значение по умолчанию — 0.6 (в пределах 0.4..0.9 установленного слайдера)
     snowOpacity.value = 0.9;
     globalAlphaMultiplier = 0.9 / 0.03; // сразу применяем прозрачность
-    snowOpVal.textContent = Number(snowOpacity.value).toFixed(3);
     snowOpacity.addEventListener('input', ()=>{
       const v = Number(snowOpacity.value);
       globalAlphaMultiplier = v / 0.03;
-      snowOpVal.textContent = v.toFixed(3);
     });
 
     const snowDensity=document.getElementById('snowDensity');
     const snowDenVal=document.getElementById('snowDenVal');
     snowDensity.value = 20.0; 
-    snowDenVal.textContent='20.0x';
     densityMultiplier = Number(snowDensity.value);
     generateFlakes();
 
     snowDensity.addEventListener('input', ()=>{ 
       densityMultiplier = Number(snowDensity.value); 
-      snowDenVal.textContent = densityMultiplier.toFixed(1) + 'x'; 
       generateFlakes(); 
     });
 
@@ -729,6 +868,7 @@
   (function(){
   // state + localStorage
   const STORAGE_KEY = 'paranoct_coins';
+  const SPAWN_ENABLED_KEY = 'spawnCoinsEnabled';
   let coins = 0;
   const coinCountEl = document.getElementById('coinCount');
   const coinCounterEl = document.getElementById('coinCounter');
@@ -738,12 +878,17 @@
   const spinBtn = document.getElementById('spinBtn');
   const closeWheel = document.getElementById('closeWheel');
   const wheelResult = document.getElementById('wheelResult');
+  let spawnEnabled = true;
 
   let spinning = false; // блокировка выхода во время прокрутки
 
   function loadCoins(){
     const v = parseInt(localStorage.getItem(STORAGE_KEY));
     coins = isNaN(v) ? 0 : v;
+    const enabled = localStorage.getItem(SPAWN_ENABLED_KEY);
+    spawnEnabled = enabled !== '0';
+    const spawnToggle = document.getElementById('spawnCoinsToggle');
+    if(spawnToggle) spawnToggle.checked = spawnEnabled;
   }
   function saveCoins(){ localStorage.setItem(STORAGE_KEY, String(coins)); }
 
@@ -849,9 +994,19 @@
   }
 
   // initial spawn + interval
-  spawnCoin();
+  if (spawnEnabled) spawnCoin();
   const spawnInterval = 360000;
-  setInterval(spawnCoin, spawnInterval);
+  setInterval(()=>{ if (spawnEnabled) spawnCoin(); }, spawnInterval);
+
+  // spawn toggle handler
+  const spawnToggle = document.getElementById('spawnCoinsToggle');
+  if (spawnToggle) {
+    spawnToggle.addEventListener('change', () => {
+      spawnEnabled = spawnToggle.checked;
+      localStorage.setItem(SPAWN_ENABLED_KEY, spawnEnabled ? '1' : '0');
+      showToastLocal(spawnEnabled ? 'Спавн монеток включён' : 'Спавн монеток отключён');
+    });
+  }
 
   // wheel labels and spin logic
   const labels = [
@@ -998,6 +1153,66 @@
         if(wheel) wheel.style.right = '12px';
       }catch(e){}
     }
+  })();
+
+  // Плейлист логика
+  (function(){
+    const tracks = [
+      { title: 'Тёмный принц - Овердоз', src: 'temnyy_princ_overdoz.mp3' },
+      { title: 'Тёмный принц - ПАПА', src: 'PAPA.mp3' }, // Замените на реальный файл
+      { title: 'KSB Music - Баратрум', src: 'bara.mp3' }, 
+      { title: 'KSB Music - Я вытащу тебя со дна', src: 'so_dna.mp3'},
+      { title: 'KSB Music - На урсе', src: 'na _urse.mp3'}// Замените на реальный файл
+    ];
+    let currentTrackIndex = 0;
+
+    const playlistBtn = document.getElementById('playlistBtn');
+    const playlistPanel = document.getElementById('playlistPanel');
+    const currentTrackTitle = document.getElementById('currentTrackTitle');
+
+    // Создаём список треков динамически
+    tracks.forEach((track, index) => {
+      const item = document.createElement('div');
+      item.className = 'playlist-item';
+      item.textContent = track.title;
+      item.dataset.index = index;
+      if (index === currentTrackIndex) item.classList.add('selected');
+      playlistPanel.appendChild(item);
+    });
+
+    // Toggle плейлиста
+    playlistBtn.addEventListener('click', () => {
+      playlistPanel.classList.toggle('open');
+    });
+
+    // Выбор трека
+    playlistPanel.addEventListener('click', (e) => {
+      if (e.target.classList.contains('playlist-item')) {
+        const index = parseInt(e.target.dataset.index);
+        currentTrackIndex = index;
+        audio.src = tracks[index].src;
+        audio.load();
+        audio.play().then(() => {
+          updateBtn();
+          currentTrackTitle.textContent = tracks[index].title;
+          // Обновляем selected
+          document.querySelectorAll('.playlist-item').forEach(item => item.classList.remove('selected'));
+          e.target.classList.add('selected');
+        }).catch(err => console.error('Ошибка воспроизведения:', err));
+        playlistPanel.classList.remove('open');
+      }
+    });
+
+    // Закрытие плейлиста при клике вне
+    document.addEventListener('click', (e) => {
+      if (!playlistPanel.contains(e.target) && !playlistBtn.contains(e.target)) {
+        playlistPanel.classList.remove('open');
+      }
+    });
+
+    // Инициализация
+    currentTrackTitle.textContent = tracks[currentTrackIndex].title;
+    audio.src = tracks[currentTrackIndex].src;
   })();
 
 </script>
