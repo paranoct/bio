@@ -469,50 +469,51 @@
   ======================================================================================== */
   @media (max-width: 420px) {
     /* make card narrower and centered on phone */
-    .wrap{padding:18px}
+    .wrap{padding:18px 12px;}
     .card {
       grid-template-columns: 1fr !important;
-      max-width: 420px;
-      padding: 16px !important;
+      max-width: 100%;
+      padding: 20px !important;
       border-radius: 14px;
+      gap: 24px;
     }
 
     /* STACK profile vertically and center */
     .profile {
       flex-direction: column !important;
       align-items: center !important;
-      padding: 14px !important;
-      gap: 10px !important;
+      padding: 16px !important;
+      gap: 16px !important;
     }
 
     /* Larger avatar on phones (close to sample) */
     .avatar {
-      width: 128px !important;
-      height: 128px !important;
+      width: 140px !important;
+      height: 140px !important;
       border-radius: 50% !important;
       border-width: 2px !important;
     }
 
     .nick {
-      font-size: 22px !important;
+      font-size: 24px !important;
       text-align: center !important;
-      line-height: 1.1;
+      line-height: 1.2;
     }
 
     .bio-text {
-      font-size: 15px !important;
+      font-size: 16px !important;
       text-align: center !important;
-      max-width: 320px !important;
-      margin-top: 2px;
+      max-width: 100% !important;
+      margin-top: 4px;
     }
 
     /* panels stack vertically and grow touch targets */
     .panels {
       grid-template-columns: 1fr !important;
-      gap: 12px !important;
-      padding: 8px 0;
+      gap: 16px !important;
+      padding: 12px 0;
     }
-    .panel { padding: 14px !important; border-radius: 12px; }
+    .panel { padding: 16px !important; border-radius: 12px; }
 
     .icon_text { font-size: 22px !important;
       text-align: center !important;
@@ -520,35 +521,83 @@
     }
 
     /* move coin & wheel inward so thumbs can reach */
-    #coinCounter { right: 12px !important; bottom: 140px !important; padding:8px 10px; }
-    #wheelBtn { right: 12px !important; bottom: 76px !important; width:52px; height:52px; border-radius:12px; }
+    #coinCounter { right: 12px !important; bottom: 160px !important; padding:10px 12px; font-size: 18px; }
+    #wheelBtn { right: 12px !important; bottom: 92px !important; width:56px; height:56px; border-radius:12px; font-size: 24px; }
 
     /* make audio controls comfortable on phone */
-    .music-controls { gap:12px; flex-wrap:wrap; align-items:center; }
-    .toggle-btn { padding:10px 12px; font-size:15px; }
+    .music-controls { gap:12px; flex-wrap:wrap; align-items:center; justify-content: center; }
+    .toggle-btn { padding:12px 16px; font-size:16px; min-width: 48px; min-height: 48px; }
+    .control-btn { padding:12px 16px; font-size:16px; min-width: 48px; min-height: 48px; }
+    .playlist-btn { padding:12px 16px; font-size:16px; min-width: 48px; min-height: 48px; }
 
     /* footer to flow normally on phones */
-    .card-footer { position: relative; bottom: 0; padding-top: 8px; justify-content: center; }
+    .card-footer { position: relative; bottom: 0; padding-top: 12px; justify-content: center; }
 
     /* reduce heavy background elements on phones for perf & clarity */
     .lamp, .page-bg, .grid-bg { display: none !important; }
     #snowCanvas { display: none !important; }
 
     /* ensure wheel modal fits nicely on phone */
-    .wheelModal { width: calc(100% - 24px) !important; padding: 12px !important; }
-    #wheel { width: 84vw !important; height: 84vw !important; }
+    .wheelModal { width: calc(100% - 24px) !important; padding: 14px !important; }
+    #wheel { width: 80vw !important; height: 80vw !important; }
 
     /* keep buttons tappable */
-    .skill-btn, .btn-primary, .btn-ghost { padding: 10px 12px !important; font-size: 15px !important; border-radius: 12px !important; }
+    .skill-btn, .btn-primary, .btn-ghost { padding: 12px 16px !important; font-size: 16px !important; border-radius: 12px !important; min-width: 48px; min-height: 48px; }
+
+    /* social links larger on mobile */
+    .social-link-telegram, .social-link-github, .discord-btn {
+      height: 48px !important;
+      font-size: 16px !important;
+      padding: 0 16px !important;
+      min-width: 120px;
+    }
+
+    /* aizen text centered and larger */
+    .aizen-hypertext {
+      font-size: 15px !important;
+      text-align: center !important;
+      margin-right: 0 !important;
+      margin-bottom: 12px;
+    }
+
+    /* make the container column on mobile */
+    .right > div[style*="display:flex;justify-content:space-between"] {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 16px !important;
+    }
+
+    /* playlist panel fits screen */
+    .playlist-panel {
+      width: 100% !important;
+      max-height: 40vh !important;
+      padding: 12px !important;
+    }
+    .playlist-item {
+      padding: 14px 18px !important;
+      font-size: 16px !important;
+    }
+
+    /* settings panel fits */
+    .settings-panel {
+      width: calc(100% - 40px) !important;
+      right: 20px !important;
+      padding: 16px !important;
+    }
+    .setting-row {
+      font-size: 15px !important;
+    }
   }
 
   /* small tweak also for narrow but larger phones */
   @media (min-width: 421px) and (max-width: 700px) {
-    .avatar { width: 112px !important; height:112px !important; }
-    .nick { font-size:20px !important; }
-    #coinCounter { right: 12px !important; bottom: 120px !important; }
-    #wheelBtn { right: 12px !important; bottom: 64px !important; }
-    .card { padding: 16px !important; }
+    .avatar { width: 128px !important; height:128px !important; }
+    .nick { font-size:22px !important; }
+    #coinCounter { right: 12px !important; bottom: 140px !important; }
+    #wheelBtn { right: 12px !important; bottom: 76px !important; }
+    .card { padding: 18px !important; }
+    .social-link-telegram, .social-link-github, .discord-btn { height: 44px !important; }
+    .playlist-panel { width: 90% !important; }
   }
 
   /* Стили для кнопки плейлиста и списка треков */
@@ -746,7 +795,7 @@
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-          <div class="aizen-hypertext" style="font-size:14px;opacity:0.8;margin-right:20px"><a href="aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
+          <div class="aizen-hypertext" style="font-size:14px;opacity:0.8;margin-right:20px"><a href="https://paranoct.github.io/bio/secret/aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
             Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</a></div>
           <!-- мета перемещена в card-footer -->
         </div>
@@ -1024,8 +1073,8 @@
     while(attempt < 80){
       const leftMargin = 20;
       const topMargin = 60;
-      const marginRight = 220; // правая зона, где находятся кнопки и счетчик
-      const bottomMargin = 140; // не спавнить на низе (footer/меню)
+      const marginRight = vw < 420 ? 60 : 220; // меньше на мобильных
+      const bottomMargin = vh < 600 ? 180 : 140; // больше на мобильных для избежания низа
       x = Math.floor(Math.random() * Math.max(20, vw - marginRight - 80)) + leftMargin;
       y = Math.floor(Math.random() * Math.max(20, vh - bottomMargin)) + topMargin;
 
@@ -1224,6 +1273,7 @@
         densityMultiplier = Math.max(4, Math.min(8, densityMultiplier));
         generateFlakes();
         globalAlphaMultiplier = Math.min(globalAlphaMultiplier, 6);
+        snowEnabled = false; // отключить снег на мобильных для производительности
       }catch(e){}
       try{
         const coin = document.getElementById('coinCounter'); const wheel = document.getElementById('wheelBtn');
