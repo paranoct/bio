@@ -587,6 +587,9 @@
     .setting-row {
       font-size: 15px !important;
     }
+
+    /* Hide coins, wheel, and related elements on mobile */
+    #coinCounter, #wheelBtn, #wheelOverlay, .coin { display: none !important; }
   }
 
   /* small tweak also for narrow but larger phones */
@@ -598,6 +601,9 @@
     .card { padding: 18px !important; }
     .social-link-telegram, .social-link-github, .discord-btn { height: 44px !important; }
     .playlist-panel { width: 90% !important; }
+
+    /* Hide coins, wheel, and related elements on mobile */
+    #coinCounter, #wheelBtn, #wheelOverlay, .coin { display: none !important; }
   }
 
   /* Стили для кнопки плейлиста и списка треков */
@@ -795,7 +801,7 @@
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-          <div class="aizen-hypertext" style="font-size:14px;opacity:0.8;margin-right:20px"><a href="https://paranoct.github.io/bio/secret/aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
+          <div class="aizen-hypertext" style="font-size:14px;opacity:0.8;margin-right:20px"><a href="aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
             Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</a></div>
           <!-- мета перемещена в card-footer -->
         </div>
@@ -1268,7 +1274,8 @@
   // small mobile-friendly tweak: if phone detected, reduce snow and slightly adjust coin spawn
   (function(){
     const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-    if(isTouch || window.matchMedia('(max-width:700px)').matches){
+    const isMobile = isTouch || window.matchMedia('(max-width:700px)').matches;
+    if(isMobile){
       try{
         densityMultiplier = Math.max(4, Math.min(8, densityMultiplier));
         generateFlakes();
@@ -1277,9 +1284,15 @@
       }catch(e){}
       try{
         const coin = document.getElementById('coinCounter'); const wheel = document.getElementById('wheelBtn');
-        if(coin) coin.style.right = '12px';
-        if(wheel) wheel.style.right = '12px';
+        const wheelOverlay = document.getElementById('wheelOverlay');
+        if(coin) coin.style.display = 'none';
+        if(wheel) wheel.style.display = 'none';
+        if(wheelOverlay) wheelOverlay.style.display = 'none';
       }catch(e){}
+      // Disable spawning on mobile
+      spawnEnabled = false;
+      const spawnToggle = document.getElementById('spawnCoinsToggle');
+      if(spawnToggle) spawnToggle.checked = false;
     }
   })();
 
