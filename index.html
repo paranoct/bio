@@ -571,7 +571,7 @@
     position: absolute;
     top: 100%; /* Ниже music-controls */
     left: 0;
-    width: 320px; 
+    width: 400px;
     max-height: 200px; 
     overflow-y: scroll; 
     background: rgba(10,12,15,0.96);
@@ -746,7 +746,7 @@
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-          <div class="aizen-hypertext" style="font-size:14px;opacity:0.8;margin-right:20px"><a href="https://paranoct.github.io/bio/secret/aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
+          <div class="aizen-hypertext" style="font-size:14px;opacity:0.8;margin-right:20px"><a href="aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
             Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</a></div>
           <!-- мета перемещена в card-footer -->
         </div>
@@ -1305,7 +1305,7 @@
     tracks.forEach((track, index) => {
       const item = document.createElement('div');
       item.className = 'playlist-item';
-      item.innerHTML = `<span>${track.title}</span><span class="duration" style="opacity:0.7; font-size:13px;">--:--</span>`;
+      item.innerHTML = `<div style="display: flex; align-items: center; gap: 16px;"><span>${index + 1}</span><span>${track.title}</span></div><span class="duration" style="opacity:0.7; font-size:13px;">--:--</span>`;
       item.dataset.index = index;
       if (index === currentTrackIndex) item.classList.add('selected');
       playlistPanel.appendChild(item);
@@ -1372,6 +1372,3 @@
 </script>
 </body>
 </html>
-
-
-
