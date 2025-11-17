@@ -1,0 +1,1304 @@
+/* контейнер для счётчика монет — чуть прозрачный, над кнопками */
+#coinCounter {
+    position: fixed;
+    right: 154px;
+    bottom: 18px;
+    z-index: 10002;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: var(--deep-blue-strong);
+    font-weight: 700;
+    pointer-events: auto;
+    opacity: 0.92;
+    /* чуть прозрачный */
+    backdrop-filter: blur(4px);
+}
+
+#coinCounter i {
+    font-size: 16px
+}
+
+#coinCounter span {
+    min-width: 28px;
+    text-align: right;
+    display: inline-block
+}
+
+/* wheel open button (styled like social-link) */
+#wheelBtn {
+    position: fixed;
+    right: 86px;
+    bottom: 18px;
+    z-index: 10002;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+    pointer-events: auto;
+}
+
+#wheelBtn:hover {
+    transform: translateY(-6px);
+    background: rgba(64, 116, 130, 0.07);
+    color: var(--soft-blue);
+}
+
+/* coin visuals — чуть прозрачная и кликабельная */
+.coin {
+    position: fixed;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff5c4 0%, #ffd24d 20%, #f2b10b 60%, #a87500 100%);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), inset 0 -6px 8px rgba(0, 0, 0, 0.12);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #6a4300;
+    cursor: pointer;
+    transform-origin: center;
+    transition: transform .22s cubic-bezier(.2, .9, .3, 1), opacity .22s;
+    opacity: 0.72;
+    /* чуть прозрачная */
+    pointer-events: auto;
+}
+
+.coin.spawn-anim {
+    animation: floatUp 1.2s ease both;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(-10px) scale(0.8);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(6px) scale(1.06);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* wheel overlay */
+#wheelOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10003;
+    background: rgba(0, 0, 0, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+#wheelOverlay.open {
+    display: flex;
+}
+
+.wheelModal {
+    width: 520px;
+    max-width: calc(100% - 40px);
+    background: linear-gradient(180deg, rgba(18, 22, 24, 0.96), rgba(10, 12, 14, 0.96));
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--deep-blue-strong);
+    text-align: center;
+}
+
+.wheelWrap {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* wheel element */
+#wheel {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: conic-gradient(#f3c66b 0deg 90deg,
+            #e59e6b 90deg 180deg,
+            #027014 180deg 270deg,
+            #8d5353 270deg 360deg);
+    position: relative;
+    transition: transform 5s cubic-bezier(.14, .9, .36, 1);
+    box-shadow: inset 0 8px 36px rgba(0, 0, 0, 0.35), 0 18px 40px rgba(0, 0, 0, 0.6);
+    user-select: none;
+}
+
+/* REPLACE existing .wheelPointer block with this */
+.wheelPointer {
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 22px solid #ffd87a;
+    position: absolute;
+    /* place the pointer at top-center of the wheel modal */
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+    z-index: 3;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+    pointer-events: none;
+}
+
+/* on very small screens move pointer a little down to avoid overlap */
+@media (max-width: 420px) {
+    .wheelPointer { top: 14px; border-left-width: 12px; border-right-width: 12px; border-top-width: 18px; }
+}
+
+.wheel-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-ghost {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+}
+
+/* добавлены hover/active эффекты для кнопки Крутить */
+.btn-primary {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #4a8ba3, #3f7486);
+    color: #021;
+    cursor: pointer;
+    border: none;
+    font-weight: 700;
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    opacity: 0.98;
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.btn-primary[disabled] {
+    opacity: 0.5;
+    transform: none;
+    cursor: default;
+    box-shadow: none;
+}
+
+#wheelResult {
+    margin-top: 10px;
+    min-height: 22px;
+    color: #dfefff;
+    font-weight: 700;
+}
+
+/* small mobile adjustments */
+@media(max-width:600px) {
+    #coinCounter {
+        right: 12px;
+        bottom: 74px;
+    }
+
+    #wheelBtn {
+        right: 64px;
+        bottom: 18px;
+    }
+}
+
+:root {
+    --bg-black: #000;
+    --deep-blue: #4a8ba3;
+    --deep-blue-strong: #a9e6f7;
+    --soft-blue: #3f7486;
+    --blur: 16px
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    background: var(--bg-black);
+    color: var(--deep-blue-strong);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    overflow-x: hidden;
+    position: relative
+}
+
+/* lamp: полностью видимая фотография, стоящая правее и ниже (как будто на земле) */
+.lamp {
+    position: fixed;
+    right: 80%;
+    /* сдвинуто вправо — при необходимости поменяй */
+    top: 95%;
+    /* стоит на "земле" — при необходимости поменяй */
+    width: 520px;
+    height: 520px;
+    /*  4part of flag in /secret/4part.html  */
+    z-index: 0;
+    /* позади основной карточки */
+    pointer-events: none;
+    background-image: url('1');
+    /* путь к твоему локальному изображению */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    /* центр по горизонтали, низ по вертикали */
+    opacity: 0.27;
+    /* полностью непрозрачная */
+    mix-blend-mode: normal;
+    filter: contrast(0.98) brightness(0.7) saturate(0.98);
+    transform-origin: center bottom;
+    will-change: transform, opacity, filter;
+}
+
+/* добавленная фоновая картинка страницы (локальная, полупрозрачная) */
+.page-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    /* за всем остальным */
+    pointer-events: none;
+    background-image: url('fon.jpg');
+    /* если фон лежит рядом с html — оставь так, иначе укажи полный путь */
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.3;
+    /* чуть-чуть прозрачная — поменяй, если нужно */
+    filter: brightness(0.7) saturate(0.95);
+}
+
+/* ореол — над фотографией, но под UI; изменяется при мерцании */
+.lamp::after {
+    content: '';
+    position: absolute;
+    left: 40%;
+    top: 15%;
+    width: 550px;
+    height: 550px;
+    transform: translate(-50%, -50%) scale(1);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 230, 170, 0.9) 0%, rgba(255, 200, 100, 0.5) 20%, rgba(255, 160, 50, 0.18) 36%, rgba(0, 0, 0, 0) 62%);
+    filter: blur(12px) contrast(1.04);
+    z-index: 1;
+    /* поверх картинки, но ниже контента */
+    pointer-events: none;
+    transition: transform 160ms ease, opacity 160ms ease, filter 160ms ease;
+    opacity: 0.95;
+}
+
+/* состояния мерцания */
+.lamp.flicker::after {
+    transform: translate(-50%, -50%) scale(0.96);
+    opacity: 0.72;
+    filter: blur(8px) contrast(1.08) brightness(1.03);
+}
+
+.lamp.dim::after {
+    transform: translate(-50%, -50%) scale(0.82);
+    opacity: 0.28;
+    filter: blur(22px) contrast(0.9) brightness(0.62);
+}
+
+.lamp.spark::after {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 1.12;
+    filter: blur(6px) contrast(1.18) brightness(1.15);
+}
+
+/* предотвращаем какие-либо дополнительные декоративные элементы (ветер) */
+/* grid & snow remain if you want — particles removed */
+.grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none
+}
+
+#snowCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: block
+}
+
+.wrap {
+    position: relative;
+    z-index: 6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px
+}
+
+.card {
+    width: 100%;
+    max-width: 1160px;
+    border-radius: 16px;
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(1px);
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 18px;
+    align-items: start;
+    overflow: hidden;
+    position: relative;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(90deg, rgba(74, 139, 163, 0.06), rgba(74, 139, 163, 0.14) 50%, rgba(74, 139, 163, 0.06));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    z-index: -1;
+    animation: borderSlide 6s linear infinite
+}
+
+@keyframes borderSlide {
+    0% {
+        background-position: 0% 50%
+    }
+
+    100% {
+        background-position: 200% 50%
+    }
+}
+
+/* card footer (фикс внизу карточки) */
+.card-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 18px;
+    z-index: 8;
+    /* над карточкой содержимым */
+    pointer-events: none;
+}
+
+.card-footer .meta {
+    pointer-events: auto;
+    font-size: 12px;
+    opacity: 0.7;
+    text-align: right;
+    color: rgba(207, 230, 247, 0.9);
+}
+
+/* остальной стиль — без изменений */
+.profile {
+    padding: 22px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center
+}
+
+.avatar {
+    /* чуть побольше, круглая форма */
+    width: 152px;
+    height: 152px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    /* сохраняем визуальные стили оригинала + мягкий голубой обод */
+    border: 2px solid rgba(64, 115, 129, 0.85);
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.6),
+        inset 0 0 24px rgba(74, 139, 163, 0.02),
+        0 0 6px rgba(64, 115, 129, 0.10),
+        0 0 22px rgba(64, 115, 129, 0.05);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    z-index: 2;
+    will-change: box-shadow;
+    --avatar-glow-rgb: 64, 115, 129;
+    /* если вы уже добавили анимацию avatarGlowPulse — она сохранится и будет работать */
+    animation: avatarGlowPulse 1s ease-in-out infinite;
+}
+
+@keyframes avatarGlowPulse {
+    0% {
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 14px rgba(var(--avatar-glow-rgb), 0.3),
+            0 0 34px rgba(var(--avatar-glow-rgb), 0.10);
+    }
+
+    14.3% {
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 27px rgba(var(--avatar-glow-rgb), 0.4),
+            0 0 62px rgba(var(--avatar-glow-rgb), 0.2);
+    }
+
+    28.6% {
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 40px rgba(var(--avatar-glow-rgb), 0.55),
+            0 0 96px rgba(var(--avatar-glow-rgb), 0.3);
+    }
+
+    42.9% {
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 54px rgba(var(--avatar-glow-rgb), 0.7),
+            0 0 120px rgba(var(--avatar-glow-rgb), 0.45);
+    }
+
+    57.2% {
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 54px rgba(var(--avatar-glow-rgb), 0.7),
+            0 0 120px rgba(var(--avatar-glow-rgb), 0.45);
+    }
+
+    71.5% {
+        /* плавное возвращение света */
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 40px rgba(var(--avatar-glow-rgb), 0.55),
+            0 0 96px rgba(var(--avatar-glow-rgb), 0.3);
+    }
+
+    85.8% {
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 27px rgba(var(--avatar-glow-rgb), 0.4),
+            0 0 62px rgba(var(--avatar-glow-rgb), 0.2);
+    }
+
+    100% {
+        box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.6),
+            inset 0 0 24px rgba(74, 139, 163, 0.02),
+            0 0 14px rgba(var(--avatar-glow-rgb), 0.3),
+            0 0 34px rgba(var(--avatar-glow-rgb), 0.10);
+    }
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block
+}
+
+.nick {
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--deep-blue-strong);
+    text-align: center
+}
+
+.tag {
+    font-weight: 300;
+    font-size: 12px;
+    opacity: 0.6;
+    margin-left: 6px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background: rgba(74, 139, 163, 0.05)
+}
+
+.bio-text {
+    color: rgba(207, 230, 247, 0.92);
+    line-height: 1.5;
+    text-align: center;
+    font-size: 14px;
+    max-width: 300px
+}
+
+.right {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 2
+}
+
+.panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+}
+
+.panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.01));
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    position: relative
+}
+
+.panel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--soft-blue), var(--deep-blue))
+}
+
+.panel h4 {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--deep-blue-strong);
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.skills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.skill-btn {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: transparent;
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+    font-weight: 600
+}
+
+.skill-btn:hover {
+    transform: translateY(-4px);
+    background: rgba(64, 116, 130, 0.05)
+}
+
+.music-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+.toggle-btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(64, 115, 129, 0.5);
+    border: 1px solid rgba(64, 115, 129, 0.75);
+    cursor: pointer
+}
+
+.progress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    overflow: hidden;
+    flex: 1;
+    cursor: pointer;
+    position: relative
+}
+
+.progress>i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--soft-blue), var(--deep-blue));
+    transition: width .12s linear
+}
+
+.links {
+    display: flex;
+    gap: 10px;
+    align-items: center
+}
+
+.social-link-telegram {
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    /* Тот же шрифт, что в .nick */
+    font-weight: 800;
+    /* Extrabold, как в нике */
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+}
+
+.social-link-telegram:hover {
+    transform: translateY(-6px);
+    background: rgba(64, 116, 130, 0.07);
+    color: var(--soft-blue)
+}
+
+.social-link-github {
+    text-transform: none;
+    width: 125px;
+    height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+}
+
+.social-link-github:hover {
+    transform: translateY(-6px);
+    background: rgba(64, 116, 130, 0.07);
+    color: var(--soft-blue)
+}
+
+/* Discord button — выглядит и ведёт себя как .social-link */
+.discord-btn {
+    width: 120px;
+    height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+}
+
+/* hover/active like the others */
+.discord-btn:hover {
+    transform: translateY(-6px);
+    background: rgba(64, 116, 130, 0.07);
+    color: var(--soft-blue);
+}
+
+/* немного фокуса для клавиатурной навигации */
+.discord-btn:focus {
+    outline: 2px solid rgba(74, 139, 163, 0.18);
+    outline-offset: 3px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.meta {
+    font-size: 14px;
+    opacity: 0.7;
+    text-align: middle
+}
+
+.settings-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 9999;
+    background: linear-gradient(180deg, var(--deep-blue), var(--soft-blue));
+    color: #032;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    cursor: pointer
+}
+
+.settings-panel {
+    position: fixed;
+    right: 18px;
+    bottom: 86px;
+    width: 320px;
+    background: rgba(10, 12, 15, 0.05);
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(3px);
+    z-index: 9998;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 22px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 10000
+}
+
+@media(max-width:900px) {
+    .card {
+        grid-template-columns: 1fr;
+        padding: 16px
+    }
+
+    .profile {
+        flex-direction: row;
+        gap: 12px;
+        align-items: center
+    }
+
+    .bio-text {
+        text-align: left;
+        max-width: unset
+    }
+
+    .panels {
+        grid-template-columns: 1fr
+    }
+
+    .meta {
+        text-align: center
+    }
+
+    .lamp {
+        display: none
+    }
+}
+
+/* ========================= MOBILE OVERRIDES: phones (~<=420px) =========================
+     These rules preserve desktop behavior but change layout on phones:
+     - Profile becomes stacked column (avatar centered above text)
+     - Avatar size is increased for better visibility
+     - Panels stack single-column and padding increased for touch
+     - Coin/wheel controls moved inward for thumb reach
+  ======================================================================================== */
+@media (max-width: 350px) {
+
+    /* make card narrower and centered on phone */
+    .wrap {
+        padding: 18px 12px;
+    }
+
+    .card {
+        grid-template-columns: 1fr !important;
+        max-width: 100%;
+        padding: 20px !important;
+        border-radius: 14px;
+        gap: 24px;
+    }
+
+    /* STACK profile vertically and center */
+    .profile {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 16px !important;
+        gap: 16px !important;
+    }
+
+    /* Larger avatar on phones (close to sample) */
+    .avatar {
+        width: 140px !important;
+        height: 140px !important;
+        border-radius: 50% !important;
+        border-width: 2px !important;
+    }
+
+    .nick {
+        font-size: 24px !important;
+        text-align: center !important;
+        line-height: 1.2;
+    }
+
+    .bio-text {
+        font-size: 16px !important;
+        text-align: center !important;
+        max-width: 100% !important;
+        margin-top: 4px;
+    }
+
+    /* panels stack vertically and grow touch targets */
+    .panels {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        padding: 12px 0;
+    }
+
+    .panel {
+        padding: 16px !important;
+        border-radius: 12px;
+    }
+
+    .icon_text {
+        font-size: 22px !important;
+        text-align: center !important;
+        line-height: 1.1;
+    }
+
+    /* move coin & wheel inward so thumbs can reach */
+    #coinCounter {
+        right: 12px !important;
+        bottom: 160px !important;
+        padding: 10px 12px;
+        font-size: 18px;
+    }
+
+    #wheelBtn {
+        right: 12px !important;
+        bottom: 92px !important;
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        font-size: 24px;
+    }
+
+    /* make audio controls comfortable on phone */
+    .music-controls {
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .toggle-btn {
+        padding: 12px 16px;
+        font-size: 16px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .control-btn {
+        padding: 12px 16px;
+        font-size: 16px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .playlist-btn {
+        padding: 12px 16px;
+        font-size: 16px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    /* footer to flow normally on phones */
+    .card-footer {
+        position: relative;
+        bottom: 0;
+        padding-top: 12px;
+        justify-content: center;
+    }
+
+    /* reduce heavy background elements on phones for perf & clarity */
+    .lamp,
+    .page-bg,
+    .grid-bg {
+        display: none !important;
+    }
+
+    #snowCanvas {
+        display: none !important;
+    }
+
+    /* ensure wheel modal fits nicely on phone */
+    .wheelModal {
+        width: calc(100% - 24px) !important;
+        padding: 14px !important;
+    }
+
+    #wheel {
+        width: 80vw !important;
+        height: 80vw !important;
+    }
+
+    /* keep buttons tappable */
+    .skill-btn,
+    .btn-primary,
+    .btn-ghost {
+        padding: 12px 16px !important;
+        font-size: 16px !important;
+        border-radius: 12px !important;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    /* social links larger on mobile */
+    .social-link-telegram,
+    .social-link-github,
+    .discord-btn {
+        height: 48px !important;
+        font-size: 16px !important;
+        padding: 0 16px !important;
+        min-width: 120px;
+    }
+
+    /* aizen text centered and larger */
+    .aizen-hypertext {
+        font-size: 15px !important;
+        text-align: center !important;
+        margin-right: 0 !important;
+        margin-bottom: 12px;
+    }
+
+    /* make the container column on mobile */
+    .right>div[style*="display:flex;justify-content:space-between"] {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 16px !important;
+    }
+
+    /* playlist panel fits screen */
+    .playlist-panel {
+        width: 100% !important;
+        max-height: 40vh !important;
+        padding: 12px !important;
+    }
+
+    .playlist-item {
+        padding: 14px 18px !important;
+        font-size: 16px !important;
+    }
+
+    /* settings panel fits */
+    .settings-panel {
+        width: calc(100% - 40px) !important;
+        right: 20px !important;
+        padding: 16px !important;
+    }
+
+    .setting-row {
+        font-size: 15px !important;
+    }
+
+    /* Hide coins, wheel, and related elements on mobile */
+    #coinCounter,
+    #wheelBtn,
+    #wheelOverlay,
+    .coin {
+        display: none !important;
+    }
+}
+
+/* small tweak also for narrow but larger phones */
+@media (min-width: 421px) and (max-width: 700px) {
+    .avatar {
+        width: 128px !important;
+        height: 128px !important;
+    }
+
+    .nick {
+        font-size: 22px !important;
+    }
+
+    #coinCounter {
+        right: 12px !important;
+        bottom: 140px !important;
+    }
+
+    #wheelBtn {
+        right: 12px !important;
+        bottom: 76px !important;
+    }
+
+    .card {
+        padding: 18px !important;
+    }
+
+    .social-link-telegram,
+    .social-link-github,
+    .discord-btn {
+        height: 44px !important;
+    }
+
+    .playlist-panel {
+        width: 90% !important;
+    }
+
+    /* Hide coins, wheel, and related elements on mobile */
+    #coinCounter,
+    #wheelBtn,
+    #wheelOverlay,
+    .coin {
+        display: none !important;
+    }
+}
+
+/* Стили для кнопки плейлиста и списка треков */
+.playlist-btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(64, 115, 129, 0.5);
+    border: 1px solid rgba(64, 115, 129, 0.75);
+    cursor: pointer;
+    color: var(--deep-blue-strong);
+    font-size: 14px;
+    transition: transform .18s ease, background .18s ease;
+}
+
+.playlist-btn:hover {
+    transform: translateY(-4px);
+    background: rgba(64, 115, 129, 0.7);
+}
+
+.playlist-panel {
+    position: absolute;
+    top: 100%;
+    /* Ниже music-controls */
+    left: 0;
+    width: 400px;
+    max-height: 200px;
+    overflow-y: scroll;
+    background: rgba(10, 12, 15, 0.96);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    /*Увеличен зазор */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.playlist-panel.open {
+    display: flex;
+    /* Убедитесь, что display: flex; для открытого состояния */
+}
+
+/* Дополнительно, чтобы скроллбар выглядел лучше (опционально, для WebKit браузеров) */
+.playlist-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.playlist-panel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.playlist-panel::-webkit-scrollbar-thumb {
+    background: rgba(64, 115, 129, 0.5);
+    border-radius: 10px;
+}
+
+.playlist-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(64, 115, 129, 0.8);
+}
+
+/* Для Firefox (опционально) */
+.playlist-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(64, 115, 129, 0.5) rgba(255, 255, 255, 0.05);
+}
+
+/* Дополнительно, чтобы скроллбар выглядел лучше (опционально, для WebKit браузеров) */
+.playlist-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.playlist-panel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.playlist-panel::-webkit-scrollbar-thumb {
+    background: rgba(64, 115, 129, 0.5);
+    border-radius: 10px;
+}
+
+.playlist-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(64, 115, 129, 0.8);
+}
+
+.playlist-item {
+    padding: 12px 16px;
+    /* Увеличено */
+    border-radius: 10px;
+    /* Слегка увеличено */
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--deep-blue-strong);
+    cursor: pointer;
+    transition: background .18s ease, transform .18s ease;
+    font-size: 15px;
+    /* Увеличен шрифт */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playlist-item:hover {
+    background: rgba(64, 116, 130, 0.07);
+    transform: translateY(-2px);
+}
+
+.playlist-item.selected {
+    background: rgba(64, 115, 129, 0.5);
+    font-weight: 700;
+}
+
+/* Новые стили для дополнительных кнопок управления */
+.control-btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(64, 115, 129, 0.5);
+    border: 1px solid rgba(64, 115, 129, 0.75);
+    cursor: pointer;
+    color: var(--deep-blue-strong);
+    font-size: 14px;
+    transition: transform .18s ease, background .18s ease;
+}
+
+.control-btn:hover {
+    transform: translateY(-4px);
+    background: rgba(64, 115, 129, 0.7);
+}
+
+.control-btn.active {
+    background: rgba(64, 115, 129, 0.8);
+    color: #fff;
+}
+
+.aizen-hypertext a {
+    text-decoration: none;
+    color: inherit;
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+}
+
+.aizen-hypertext a:hover {
+    transform: translateY(-4px);
+    background: rgba(64, 116, 130, 0.07);
+    color: var(--soft-blue);
+    text-decoration: underline;
+}
+
+/* === MOBILE: phones (typical widths ~360-420px) === */
+@media (max-width: 420px) {
+    .card {
+        grid-template-columns: 1fr !important;
+        max-width: 96vw !important;
+        padding: 16px !important;
+        border-radius: 12px;
+        gap: 18px;
+        box-shadow: none !important;
+        border: none !important;
+        background: rgba(0,0,0,0) !important;
+    }
+
+    .progress { min-width: 110px; max-width: 65vw; }
+
+    .wrap { padding: 12px !important; }
+
+    .profile { flex-direction: column !important; align-items: center !important; padding: 12px !important; gap: 12px !important; }
+    .avatar { width: 34vw; max-width: 140px; height: auto; aspect-ratio: 1/1; border-radius: 50%; }
+    .nick { font-size: 20px !important; text-align: center; }
+    .bio-text { font-size: 15px !important; max-width: 92%; text-align: center; }
+
+    .panels { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .panel { padding: 12px !important; border-radius: 10px !important; }
+
+    /* make all tappable controls comfortable */
+    .skill-btn, .control-btn, .toggle-btn, .playlist-btn,
+    .social-link-telegram, .social-link-github, .discord-btn {
+        min-height: 48px !important;
+        padding: 12px 14px !important;
+        font-size: 15px !important;
+        touch-action: manipulation; /* улучшает отзывчивость на мобильных */
+    }
+
+    /* hide heavy visuals for phones */
+    .lamp, .page-bg, .grid-bg, #snowCanvas, #coinCounter,
+    #wheelBtn, #wheelOverlay, .coin, .playlist-panel, .settings-panel, .settings-toggle {
+        display: none !important;
+    }
+
+    .card-footer { position: relative; padding-top: 12px; bottom: 0; text-align: center; }
+
+    /* playlist fits */
+    .playlist-panel { width: 100% !important; max-height: 36vh !important; padding: 10px !important; }
+
+    /* simpler pointer for wheel Modal if it unexpectedly appears */
+    .wheelModal { max-width: calc(100% - 24px) !important; padding: 12px !important; }
+    #wheel { width: 78vw !important; height: 78vw !important; }
+
+    /* prevent horizontal overflow on small screens */
+    html, body { overflow-x: hidden; }
+}
+
+/* === Reduced motion: global ===*/
+@media (max-width: 420px) and (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+}
