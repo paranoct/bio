@@ -371,8 +371,7 @@ body {
 }
 
 .card {
-    width: 100%;
-    max-width: 1160px;
+    width: 135vh;
     border-radius: 16px;
     padding: 20px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
@@ -416,10 +415,10 @@ body {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 10px;
+    bottom: 1.2vh;
     display: flex;
     justify-content: flex-end;
-    padding: 0 18px;
+    padding: 0 1.8vh;
     z-index: 8;
     /* над карточкой содержимым */
     pointer-events: none;
@@ -427,7 +426,7 @@ body {
 
 .card-footer .meta {
     pointer-events: auto;
-    font-size: 12px;
+    font-size: 1.2vh;
     opacity: 0.7;
     text-align: right;
     color: rgba(207, 230, 247, 0.9);
@@ -435,19 +434,20 @@ body {
 
 /* остальной стиль — без изменений */
 .profile {
-    padding: 22px;
+    max-width: 40vh;
+    padding: 2vh;
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1.8vh;
     align-items: center
 }
 
 .avatar {
     /* чуть побольше, круглая форма */
-    width: 152px;
-    height: 152px;
+    width: 18vh;
+    height: 18vh;
     border-radius: 50%;
     overflow: hidden;
 
@@ -548,14 +548,14 @@ body {
 
 .nick {
     font-weight: 800;
-    font-size: 24px;
+    font-size: 2.7vh;
     color: var(--deep-blue-strong);
     text-align: center
 }
 
 .tag {
     font-weight: 300;
-    font-size: 12px;
+    font-size: 1.5vh;
     opacity: 0.6;
     margin-left: 6px;
     padding: 4px 8px;
@@ -567,29 +567,29 @@ body {
     color: rgba(207, 230, 247, 0.92);
     line-height: 1.5;
     text-align: center;
-    font-size: 14px;
+    font-size: 1.65vh;
     max-width: 300px
 }
 
 .right {
-    padding: 18px;
+    padding: 2vh;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 1.6vh;
     z-index: 2
 }
 
 .panels {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px
+    gap: 1vh;
 }
 
 .panel {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.01));
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 1.2vh;
+    border-radius: 1vh;
+    border: 0.1vh solid rgba(255, 255, 255, 0.03);
     position: relative
 }
 
@@ -604,30 +604,31 @@ body {
 }
 
 .panel h4 {
-    margin: 0 0 10px 0;
-    font-size: 13px;
+    margin: 0 0 0.9vh 0;
+    font-size: 1.4vh;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.1vh;
     color: var(--deep-blue-strong);
     display: flex;
     align-items: center;
-    gap: 8px
+    gap: 0.6vh
 }
 
 .skills {
     display: flex;
-    gap: 8px;
+    gap: 0.6vh;
     flex-wrap: wrap
 }
 
 .skill-btn {
-    padding: 8px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.9vh 1.4vh;
+    border-radius: 100vh;
+    border: 0.1vh solid rgba(255, 255, 255, 0.04);
     background: transparent;
     color: var(--deep-blue-strong);
     cursor: pointer;
-    font-weight: 600
+    font-weight: 600;
+    font-size: 1.5vh;
 }
 
 .skill-btn:hover {
@@ -637,22 +638,23 @@ body {
 
 .music-controls {
     display: flex;
-    gap: 10px;
+    gap: 1vh;
     align-items: center
 }
 
 .toggle-btn {
-    padding: 8px 12px;
-    border-radius: 10px;
     background: rgba(64, 115, 129, 0.5);
-    border: 1px solid rgba(64, 115, 129, 0.75);
-    cursor: pointer
+    border: 0.1vh solid rgba(64, 115, 129, 0.75);
+    cursor: pointer;
+    padding: 0.8vh 1.4vh;
+    border-radius: 0.9vh;
+    font-size: 1.6vh;
 }
 
 .progress {
-    height: 6px;
+    height: 0.5vh;
     background: rgba(255, 255, 255, 0.03);
-    border-radius: 6px;
+    border-radius: 0.5vh;
     overflow: hidden;
     flex: 1;
     cursor: pointer;
@@ -669,15 +671,15 @@ body {
 
 .links {
     display: flex;
-    gap: 10px;
+    gap: 1vh;
     align-items: center
 }
 
 .social-link-telegram {
-    width: 140px;
-    height: 40px;
+    width: 15vh;
+    height: 5vh;
     padding: 0;
-    border-radius: 10px;
+    border-radius: 1vh;
     display: flex;
     align-items: center;
     font-family: 'Inter', sans-serif;
@@ -686,7 +688,7 @@ body {
     /* Extrabold, как в нике */
     justify-content: center;
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 0.1vh solid rgba(255, 255, 255, 0.04);
     color: var(--deep-blue-strong);
     cursor: pointer;
     transition: transform .18s ease, background .18s ease, color .18s ease;
@@ -700,17 +702,17 @@ body {
 
 .social-link-github {
     text-transform: none;
-    width: 125px;
-    height: 40px;
+    width: 15vh;
+    height: 5vh;
     padding: 0;
-    border-radius: 10px;
+    border-radius: 1vh;
     display: flex;
     align-items: center;
     font-family: 'Inter', sans-serif;
     font-weight: 800;
     justify-content: center;
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 0.1vh solid rgba(255, 255, 255, 0.04);
     color: var(--deep-blue-strong);
     cursor: pointer;
     font-weight: 700;
@@ -725,17 +727,17 @@ body {
 
 /* Discord button — выглядит и ведёт себя как .social-link */
 .discord-btn {
-    width: 120px;
-    height: 40px;
+    width: 15vh;
+    height: 5vh;
     padding: 0;
-    border-radius: 10px;
+    border-radius: 1vh;
     display: flex;
     align-items: center;
     font-family: 'Inter', sans-serif;
     font-weight: 800;
     justify-content: center;
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 0.1vh solid rgba(255, 255, 255, 0.04);
     color: var(--deep-blue-strong);
     cursor: pointer;
     font-weight: 700;
@@ -810,303 +812,17 @@ body {
     z-index: 10000
 }
 
-@media(max-width:900px) {
-    .card {
-        grid-template-columns: 1fr;
-        padding: 16px
-    }
-
-    .profile {
-        flex-direction: row;
-        gap: 12px;
-        align-items: center
-    }
-
-    .bio-text {
-        text-align: left;
-        max-width: unset
-    }
-
-    .panels {
-        grid-template-columns: 1fr
-    }
-
-    .meta {
-        text-align: center
-    }
-
-    .lamp {
-        display: none
-    }
-}
-
-/* ========================= MOBILE OVERRIDES: phones (~<=420px) =========================
-     These rules preserve desktop behavior but change layout on phones:
-     - Profile becomes stacked column (avatar centered above text)
-     - Avatar size is increased for better visibility
-     - Panels stack single-column and padding increased for touch
-     - Coin/wheel controls moved inward for thumb reach
-  ======================================================================================== */
-@media (max-width: 350px) {
-
-    /* make card narrower and centered on phone */
-    .wrap {
-        padding: 18px 12px;
-    }
-
-    .card {
-        grid-template-columns: 1fr !important;
-        max-width: 100%;
-        padding: 20px !important;
-        border-radius: 14px;
-        gap: 24px;
-    }
-
-    /* STACK profile vertically and center */
-    .profile {
-        flex-direction: column !important;
-        align-items: center !important;
-        padding: 16px !important;
-        gap: 16px !important;
-    }
-
-    /* Larger avatar on phones (close to sample) */
-    .avatar {
-        width: 140px !important;
-        height: 140px !important;
-        border-radius: 50% !important;
-        border-width: 2px !important;
-    }
-
-    .nick {
-        font-size: 24px !important;
-        text-align: center !important;
-        line-height: 1.2;
-    }
-
-    .bio-text {
-        font-size: 16px !important;
-        text-align: center !important;
-        max-width: 100% !important;
-        margin-top: 4px;
-    }
-
-    /* panels stack vertically and grow touch targets */
-    .panels {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-        padding: 12px 0;
-    }
-
-    .panel {
-        padding: 16px !important;
-        border-radius: 12px;
-    }
-
-    .icon_text {
-        font-size: 22px !important;
-        text-align: center !important;
-        line-height: 1.1;
-    }
-
-    /* move coin & wheel inward so thumbs can reach */
-    #coinCounter {
-        right: 12px !important;
-        bottom: 160px !important;
-        padding: 10px 12px;
-        font-size: 18px;
-    }
-
-    #wheelBtn {
-        right: 12px !important;
-        bottom: 92px !important;
-        width: 56px;
-        height: 56px;
-        border-radius: 12px;
-        font-size: 24px;
-    }
-
-    /* make audio controls comfortable on phone */
-    .music-controls {
-        gap: 12px;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .toggle-btn {
-        padding: 12px 16px;
-        font-size: 16px;
-        min-width: 48px;
-        min-height: 48px;
-    }
-
-    .control-btn {
-        padding: 12px 16px;
-        font-size: 16px;
-        min-width: 48px;
-        min-height: 48px;
-    }
-
-    .playlist-btn {
-        padding: 12px 16px;
-        font-size: 16px;
-        min-width: 48px;
-        min-height: 48px;
-    }
-
-    /* footer to flow normally on phones */
-    .card-footer {
-        position: relative;
-        bottom: 0;
-        padding-top: 12px;
-        justify-content: center;
-    }
-
-    /* reduce heavy background elements on phones for perf & clarity */
-    .lamp,
-    .page-bg,
-    .grid-bg {
-        display: none !important;
-    }
-
-    #snowCanvas {
-        display: none !important;
-    }
-
-    /* ensure wheel modal fits nicely on phone */
-    .wheelModal {
-        width: calc(100% - 24px) !important;
-        padding: 14px !important;
-    }
-
-    #wheel {
-        width: 80vw !important;
-        height: 80vw !important;
-    }
-
-    /* keep buttons tappable */
-    .skill-btn,
-    .btn-primary,
-    .btn-ghost {
-        padding: 12px 16px !important;
-        font-size: 16px !important;
-        border-radius: 12px !important;
-        min-width: 48px;
-        min-height: 48px;
-    }
-
-    /* social links larger on mobile */
-    .social-link-telegram,
-    .social-link-github,
-    .discord-btn {
-        height: 48px !important;
-        font-size: 16px !important;
-        padding: 0 16px !important;
-        min-width: 120px;
-    }
-
-    /* aizen text centered and larger */
-    .aizen-hypertext {
-        font-size: 15px !important;
-        text-align: center !important;
-        margin-right: 0 !important;
-        margin-bottom: 12px;
-    }
-
-    /* make the container column on mobile */
-    .right>div[style*="display:flex;justify-content:space-between"] {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 16px !important;
-    }
-
-    /* playlist panel fits screen */
-    .playlist-panel {
-        width: 100% !important;
-        max-height: 40vh !important;
-        padding: 12px !important;
-    }
-
-    .playlist-item {
-        padding: 14px 18px !important;
-        font-size: 16px !important;
-    }
-
-    /* settings panel fits */
-    .settings-panel {
-        width: calc(100% - 40px) !important;
-        right: 20px !important;
-        padding: 16px !important;
-    }
-
-    .setting-row {
-        font-size: 15px !important;
-    }
-
-    /* Hide coins, wheel, and related elements on mobile */
-    #coinCounter,
-    #wheelBtn,
-    #wheelOverlay,
-    .coin {
-        display: none !important;
-    }
-}
-
-/* small tweak also for narrow but larger phones */
-@media (min-width: 421px) and (max-width: 700px) {
-    .avatar {
-        width: 128px !important;
-        height: 128px !important;
-    }
-
-    .nick {
-        font-size: 22px !important;
-    }
-
-    #coinCounter {
-        right: 12px !important;
-        bottom: 140px !important;
-    }
-
-    #wheelBtn {
-        right: 12px !important;
-        bottom: 76px !important;
-    }
-
-    .card {
-        padding: 18px !important;
-    }
-
-    .social-link-telegram,
-    .social-link-github,
-    .discord-btn {
-        height: 44px !important;
-    }
-
-    .playlist-panel {
-        width: 90% !important;
-    }
-
-    /* Hide coins, wheel, and related elements on mobile */
-    #coinCounter,
-    #wheelBtn,
-    #wheelOverlay,
-    .coin {
-        display: none !important;
-    }
-}
-
 /* Стили для кнопки плейлиста и списка треков */
 .playlist-btn {
-    padding: 8px 12px;
-    border-radius: 10px;
     background: rgba(64, 115, 129, 0.5);
-    border: 1px solid rgba(64, 115, 129, 0.75);
     cursor: pointer;
     color: var(--deep-blue-strong);
-    font-size: 14px;
     transition: transform .18s ease, background .18s ease;
+    border: 0.1vh solid rgba(64, 115, 129, 0.75);
+    cursor: pointer;
+    padding: 0.8vh 1.4vh;
+    border-radius: 0.9vh;
+    font-size: 1.6vh;
 }
 
 .playlist-btn:hover {
@@ -1119,20 +835,20 @@ body {
     top: 100%;
     /* Ниже music-controls */
     left: 0;
-    width: 400px;
-    max-height: 200px;
+    width: 50vh;
+    max-height: 25vh;
     overflow-y: scroll;
     background: rgba(10, 12, 15, 0.96);
-    border-radius: 12px;
-    padding: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(8px);
+    border-radius: 1.4vh;
+    padding: 1.6vh;
+    border: 0.1vh solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(0.7vh);
     z-index: 10;
     display: none;
     flex-direction: column;
-    gap: 12px;
+    gap: 1.2vh;
     /*Увеличен зазор */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 1.2vh 3vh rgba(0, 0, 0, 0.6);
 }
 
 .playlist-panel.open {
@@ -1142,17 +858,17 @@ body {
 
 /* Дополнительно, чтобы скроллбар выглядел лучше (опционально, для WebKit браузеров) */
 .playlist-panel::-webkit-scrollbar {
-    width: 8px;
+    width: 0.7vh;
 }
 
 .playlist-panel::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
+    border-radius: 1vh;
 }
 
 .playlist-panel::-webkit-scrollbar-thumb {
     background: rgba(64, 115, 129, 0.5);
-    border-radius: 10px;
+    border-radius: 1vh;
 }
 
 .playlist-panel::-webkit-scrollbar-thumb:hover {
@@ -1172,12 +888,12 @@ body {
 
 .playlist-panel::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
+    border-radius: 1vh;
 }
 
 .playlist-panel::-webkit-scrollbar-thumb {
     background: rgba(64, 115, 129, 0.5);
-    border-radius: 10px;
+    border-radius: 1vh;
 }
 
 .playlist-panel::-webkit-scrollbar-thumb:hover {
@@ -1185,15 +901,15 @@ body {
 }
 
 .playlist-item {
-    padding: 12px 16px;
+    padding: 1.2vh 1.6vh;
     /* Увеличено */
-    border-radius: 10px;
+    border-radius: 1vh;
     /* Слегка увеличено */
     background: rgba(255, 255, 255, 0.02);
     color: var(--deep-blue-strong);
     cursor: pointer;
     transition: background .18s ease, transform .18s ease;
-    font-size: 15px;
+    font-size: 1.7vh;
     /* Увеличен шрифт */
     display: flex;
     justify-content: space-between;
@@ -1212,13 +928,13 @@ body {
 
 /* Новые стили для дополнительных кнопок управления */
 .control-btn {
-    padding: 8px 12px;
-    border-radius: 10px;
+    padding: 0.8vh 1.4vh;
+    border-radius: 0.9vh;
     background: rgba(64, 115, 129, 0.5);
-    border: 1px solid rgba(64, 115, 129, 0.75);
+    border: 0.1vh solid rgba(64, 115, 129, 0.75);
     cursor: pointer;
     color: var(--deep-blue-strong);
-    font-size: 14px;
+    font-size: 1.6vh;
     transition: transform .18s ease, background .18s ease;
 }
 
@@ -1243,62 +959,4 @@ body {
     background: rgba(64, 116, 130, 0.07);
     color: var(--soft-blue);
     text-decoration: underline;
-}
-
-/* === MOBILE: phones (typical widths ~360-420px) === */
-@media (max-width: 420px) {
-    .card {
-        grid-template-columns: 1fr !important;
-        max-width: 96vw !important;
-        padding: 16px !important;
-        border-radius: 12px;
-        gap: 18px;
-        box-shadow: none !important;
-        border: none !important;
-        background: rgba(0,0,0,0) !important;
-    }
-
-    .progress { min-width: 110px; max-width: 65vw; }
-
-    .wrap { padding: 12px !important; }
-
-    .profile { flex-direction: column !important; align-items: center !important; padding: 12px !important; gap: 12px !important; }
-    .avatar { width: 34vw; max-width: 140px; height: auto; aspect-ratio: 1/1; border-radius: 50%; }
-    .nick { font-size: 20px !important; text-align: center; }
-    .bio-text { font-size: 15px !important; max-width: 92%; text-align: center; }
-
-    .panels { grid-template-columns: 1fr !important; gap: 12px !important; }
-    .panel { padding: 12px !important; border-radius: 10px !important; }
-
-    /* make all tappable controls comfortable */
-    .skill-btn, .control-btn, .toggle-btn, .playlist-btn,
-    .social-link-telegram, .social-link-github, .discord-btn {
-        min-height: 48px !important;
-        padding: 12px 14px !important;
-        font-size: 15px !important;
-        touch-action: manipulation; /* улучшает отзывчивость на мобильных */
-    }
-
-    /* hide heavy visuals for phones */
-    .lamp, .page-bg, .grid-bg, #snowCanvas, #coinCounter,
-    #wheelBtn, #wheelOverlay, .coin, .playlist-panel, .settings-panel, .settings-toggle {
-        display: none !important;
-    }
-
-    .card-footer { position: relative; padding-top: 12px; bottom: 0; text-align: center; }
-
-    /* playlist fits */
-    .playlist-panel { width: 100% !important; max-height: 36vh !important; padding: 10px !important; }
-
-    /* simpler pointer for wheel Modal if it unexpectedly appears */
-    .wheelModal { max-width: calc(100% - 24px) !important; padding: 12px !important; }
-    #wheel { width: 78vw !important; height: 78vw !important; }
-
-    /* prevent horizontal overflow on small screens */
-    html, body { overflow-x: hidden; }
-}
-
-/* === Reduced motion: global ===*/
-@media (max-width: 420px) and (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
 }
