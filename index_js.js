@@ -65,26 +65,6 @@ if (toggleBtn && audioEl) {
     });
 }
 
-// Мерцание лампы: только ореол/яркость меняются, фото остаётся непрозрачным
-const lamp = document.getElementById('lampBg');
-(function lampFlicker() {
-    function trigger() {
-        const r = Math.random();
-        if (r < 0.06) {
-            lamp.classList.add('dim');
-            setTimeout(() => lamp.classList.remove('dim'), 300 + Math.random() * 900);
-        } else if (r < 0.34) {
-            lamp.classList.add('flicker');
-            setTimeout(() => lamp.classList.remove('flicker'), 80 + Math.random() * 180);
-        } else if (r > 0.986) {
-            lamp.classList.add('spark');
-            setTimeout(() => lamp.classList.remove('spark'), 90 + Math.random() * 220);
-        }
-        setTimeout(trigger, 200 + Math.random() * 1000);
-    }
-    trigger();
-})();
-
 // СНЕГ: простой canvas-эффект — включаем сразу при загрузке
 const canvas = document.getElementById('snowCanvas');
 const ctx = canvas.getContext('2d');
