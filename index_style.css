@@ -226,17 +226,6 @@
     font-size: 2vh;
 }
 
-/* small mobile adjustments */
-@media(max-width:600px) {
-    #coinCounter {
-        display: none;
-    }
-
-    #wheelBtn {
-        display: none;
-    }
-}
-
 :root {
     --bg-black: #000;
     --deep-blue: #4a8ba3;
@@ -901,4 +890,88 @@ body {
     background: rgba(64, 116, 130, 0.07);
     color: var(--soft-blue);
     text-decoration: underline;
+}
+
+/* =========================================================
+   Mobile (phones)
+   Placed at the end so overrides work correctly.
+   ========================================================= */
+@media (max-width: 600px) {
+    /* hide bulky/floating UI */
+    #coinCounter,
+    #wheelBtn,
+    #settingsToggle,
+    #settingsPanel {
+        display: none !important;
+    }
+
+    /* layout: stack everything vertically */
+    .wrap {
+        padding: 24px 14px;
+        align-items: flex-start;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 560px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .profile {
+        max-width: none;
+        width: 100%;
+        padding: 16px 12px;
+    }
+
+    .right {
+        padding: 0;
+        gap: 12px;
+    }
+
+    .panels {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* hide the music player on mobile (keep links) */
+    .panels .panel:nth-child(2) h4:first-of-type,
+    .panels .panel:nth-child(2) .music-controls,
+    .panels .panel:nth-child(2) .music-controls + div,
+    .panels .panel:nth-child(2) .music-controls + div + audio {
+        display: none !important;
+    }
+
+    /* links header should not keep "player spacing" */
+    .panels .panel:nth-child(2) h4:nth-of-type(2) {
+        margin-top: 0 !important;
+    }
+
+    /* links: wrap nicely */
+    .links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .social-link-telegram,
+    .social-link-github,
+    .discord-btn {
+        width: auto;
+        flex: 1 1 46%;
+        min-width: 140px;
+    }
+
+    /* footer should not overlap content */
+    .card-footer {
+        position: static;
+        justify-content: center;
+        padding: 10px 0 0;
+    }
+
+    .card-footer .meta {
+        text-align: center;
+        font-size: 12px;
+    }
 }
