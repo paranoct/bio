@@ -1,166 +1,156 @@
-<!DOCTYPE html> 
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Paranoct — bio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com/">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- ========== 추가: монетки, счетчик и колесо фортуны ========== -->
-  <link rel="stylesheet" href="index_style.css">
+  <link rel="icon" href="avatar.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="index_style.css?v=4">
 </head>
 <body>
-  <div class="page-bg"></div>
-
-  <div class="grid-bg" aria-hidden="true"></div>
-  <canvas id="snowCanvas"></canvas>
+  <div class="page-bg" aria-hidden="true"></div>
+  <div class="page-overlay" aria-hidden="true"></div>
+  <div class="leaf-layer" id="leafLayer" aria-hidden="true"></div>
 
   <div class="wrap">
     <main class="card">
       <section class="profile">
         <div class="avatar">
-          <!-- lazy-loading avatar, укажите width/height если возможно -->
-          <img src="avatar.jpg" alt="avatar" loading="lazy" width="152" height="152">
+          <img src="avatar.jpg" alt="avatar" loading="lazy" width="176" height="176">
         </div>
-        <audio id="audio" preload="none" aria-label="Аудиоплеер"></audio>
-        <div>
-          <div class="nick">paranoct <span class="tag">• neofetch</span></div>
-          <p class="bio-text">Привет! Я изучаю информационную безопасность и в комплекте с ней python и C++. Надеюсь смогу стать призёром заключительного этапа ВСОШ.</p>
+
+        <div class="profile-copy">
+          <p class="eyebrow">bio / paranoct</p>
+          <h1 class="nick">paranoct</h1>
+          <div class="profile-details">
+            <p class="bio-text">
+            Привет! Я изучаю информационную безопасность. В 2026 году я стал призёром на заключительном этапе за 10 класс. В 11 классе собираюсь взять победителя. Так же ббшу по чуть-чуть
+            </p>
+            <img class="profile-gif" src="video.gif" alt="profile gif" loading="lazy">
+          </div>
         </div>
       </section>
 
-      <section class="right">
-        <div class="panels">
-          <div class="panel">
-            <h4><i class="fas fa-code"></i> Навыки</h4>
-            <div class="skills">
-              <button class="skill-btn" data-skill="Python">Python</button>
-              <button class="skill-btn" data-skill="C++">C++</button>
-              <button class="skill-btn" data-skill="InfoSec">InfoSec</button>
-            </div>
+      <section class="content-top">
+        <div class="panel music-panel">
+          <div class="panel-head">
+            <h2><i class="fa-solid fa-wave-square"></i> Музыка</h2>
+            <button class="playlist-btn" id="playlistBtn" type="button" aria-expanded="false" aria-controls="playlistPanel">
+              <i class="fa-solid fa-list-ul"></i>
+              <span>Плейлист</span>
+            </button>
           </div>
 
-          <div class="panel">
-            <h4><i class="fas fa-music"></i> Музыка</h4>
-            <div class="music-controls" style="position: relative;">
-              <button class="control-btn" id="prevBtn" title="Предыдущий трек"><i class="fas fa-step-backward"></i></button>
-              <button class="toggle-btn" id="toggleBtn">▶</button>
-              <button class="control-btn" id="nextBtn" title="Следующий трек"><i class="fas fa-step-forward"></i></button>
-              <button class="control-btn" id="loopBtn" title="Повтор (loop)"><i class="fas fa-repeat"></i></button>
-              <div id="currentTrackTitle" style="font-size:2vh;">Тёмный принц - Овердоз</div>
-              <button class="playlist-btn" id="playlistBtn" title="Выбрать трек">
-                <i class="fas fa-list-ul" style="color: #000;"></i>
-              </button>
-              <!-- Панель плейлиста -->
-              <div class="playlist-panel" id="playlistPanel">
-                <!-- Треки добавляются динамически через JS -->
-              </div>
-            </div>
-            <div style="margin-top:1vh;display:flex;align-items:center;gap:1vh">
-              <div class="progress" id="prog"><i></i></div>
-              <div style="font-size:1.5vh;opacity:0.75;width:10vh;text-align:right" id="timeLabel">00:00 / 00:00</div>
-            </div>
-            <audio preload="none" data-src="temnyy_princ_overdoz.mp3"></audio>
+          <p class="panel-subtitle" id="currentTrackTitle">Тёмный принц — Овердоз</p>
 
-            <h4 style="margin-top:1.8vh"><i class="fas fa-link"></i> Ссылки</h4>
-            <div class="links" style="margin-top:0.9vh">
-              <a href="https://github.com/paranoct" style="text-decoration: none;" class="social-link-github" title="GitHub">
-                <i class="fab fa-github"></i> <p>GitHub</p>
-              </a>
-              <a href="https://t.me/korben_322" style="text-decoration: none;" class="social-link-telegram" title="Telegram ">
-                <i class="fab fa-telegram"></i> <p>Telegram</p>
+          <div class="music-row">
+            <div class="music-controls">
+              <button class="control-btn" id="prevBtn" type="button" aria-label="Предыдущий трек">
+                <i class="fa-solid fa-backward-step"></i>
+              </button>
+              <button class="toggle-btn" id="toggleBtn" type="button" aria-label="Воспроизвести">
+                <i class="fa-solid fa-play"></i>
+              </button>
+              <button class="control-btn" id="nextBtn" type="button" aria-label="Следующий трек">
+                <i class="fa-solid fa-forward-step"></i>
+              </button>
+            </div>
+
+            <label class="volume-control" for="volumeRange">
+              <span class="volume-label">
+                <i class="fa-solid fa-volume-high"></i>
+                <span>Громкость</span>
+              </span>
+              <input id="volumeRange" class="volume-range" type="range" min="0" max="100" step="1" value="24">
+              <span class="volume-value" id="volumeValue">24%</span>
+            </label>
+          </div>
+
+          <div class="progress-row">
+            <button class="loop-btn" id="loopBtn" type="button" aria-pressed="false" aria-label="Повторять текущий трек">
+              <i class="fa-solid fa-repeat"></i>
+            </button>
+            <div class="progress" id="prog" role="progressbar" aria-label="Прогресс трека" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <i></i>
+            </div>
+            <div class="time-label" id="timeLabel">00:00 / 00:00</div>
+          </div>
+
+          <div class="playlist-panel" id="playlistPanel" aria-hidden="true"></div>
+        </div>
+
+        <div class="panel links-panel">
+          <h2><i class="fa-solid fa-seedling"></i> Ссылки</h2>
+
+          <div class="links">
+            <a href="https://github.com/paranoct" class="social-link" target="_blank" rel="noreferrer">
+              <i class="fa-brands fa-github"></i>
+              <div>
+                <strong>GitHub</strong>
+                <span>@paranoct</span>
+              </div>
             </a>
 
-              <!-- DISCORD BUTTON: копирует ник "paranoct" -->
-              <button id="discordBtn" class="discord-btn" title="Копировать ник в Discord"> 
-                <i class="fab fa-discord"></i> <p>Discord</p>
-              </button>
-            </div>
-          </div>
-        </div>
+            <a href="https://t.me/korben_322" class="social-link" target="_blank" rel="noreferrer">
+              <i class="fa-brands fa-telegram"></i>
+              <div>
+                <strong>Telegram</strong>
+                <span>@korben_322</span>
+              </div>
+            </a>
 
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-          <div class="aizen-hypertext" style="font-size:1.6vh;opacity:0.8;margin-right:2vh"><a href="secret/aizen.html">«Изначально никто не живёт на небесах: ни ты, ни я, ни даже Бог. 
-            Но скоро пустое место на небесном троне, которое так грустно видеть, будет занято. Отныне я буду жить на небесах»</a></div>
-          <!-- мета перемещена в card-footer -->
+            <a href="https://standoff365.com/profile/paranoct/" class="social-link standoff-link" target="_blank" rel="noreferrer">
+              <i class="fa-solid fa-shield-halved"></i>
+              <div>
+                <strong>Standoff365</strong>
+                <span>profile / paranoct</span>
+              </div>
+            </a>
+          </div>
         </div>
       </section>
 
-      <!-- footer fixed to bottom of the main card -->
-      <div class="card-footer" aria-hidden="false">
-        <div class="meta">&copy; 2025 paranoct • All rights reserved</div>
+      <div class="panel terminal-panel">
+        <div class="terminal-head">
+          <div class="terminal-dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="terminal-title">forest-shell</span>
+        </div>
+
+        <div class="terminal-output" id="terminalOutput" aria-live="polite"></div>
+
+        <form class="terminal-form" id="terminalForm" autocomplete="off">
+          <span class="terminal-prompt">paranoct@forest:~$</span>
+          <input
+            id="terminalInput"
+            class="terminal-input"
+            type="text"
+            name="command"
+            placeholder="help"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+          >
+        </form>
+
+        <p class="terminal-hint">Команды: help, about, status, track, play, pause, next, prev, volume 40, links, clear</p>
       </div>
 
+      <div class="card-footer">
+        <div class="meta">&copy; 2026 paranoct • All rights reserved</div>
+      </div>
     </main>
   </div>
 
-  <!-- === монетки и кнопка колеса фортуны === -->
-  <div id="coinCounter" aria-hidden="false" title="Монетки">
-    <i class="fas fa-coins" aria-hidden="true"></i>
-    <span id="coinCount">0</span>
-  </div>
-
-  <!-- кнопка открытия колеса (видна как квадратная иконка) -->
-  <div id="wheelBtn" title="Колесо фортуны (1 монета)">
-    <i class="fas fa-dharmachakra"></i>
-  </div>
-
-  <!-- overlay / модал колеса фортуны -->
-  <div id="wheelOverlay" aria-hidden="true">
-    <div class="wheelModal" role="dialog" aria-modal="true">
-      <div class="wheelWrap">
-        <div class="wheelPointer" aria-hidden="true"></div>
-
-        <!-- Визуальная часть колеса (фон/градиент в CSS) -->
-        <div id="wheel" aria-hidden="true"></div>
-
-        <div class="wheel-controls">
-          <button class="btn-ghost" id="closeWheel">Закрыть</button>
-          <button class="btn-primary" id="spinBtn">Крутить (1 монета)</button>
-        </div>
-
-        <div id="wheelResult" aria-live="polite" style="margin-top:10px; min-height:22px; color:#dfefff; font-weight:700"></div>
-      </div>
-    </div>
-  </div>
-  <!-- === === /монетки и колесо === -->
-
-  <div class="settings-toggle" id="settingsToggle" title="Настройки (S — снег, Space — play/pause, M — mute)">
-    <i class="fas fa-cog"></i>
-  </div>
-  <div class="settings-panel" id="settingsPanel" aria-hidden="true">
-    <h4>Настройки</h4>
-    <div class="setting-row">
-      <div style="width:240px;font-size:13px">Громкость (осторожно, громко)</div>
-      <input type="range" id="volRange" class="range" min="0" max="1" step="0.01" />
-      <div id="volVal" style="width:40px;text-align:right">3%</div>
-    </div>
-    <div class="setting-row">
-      <div style="width:160px;font-size:13px">Прозрачность снега</div>
-      <input type="range" id="snowOpacity" class="range" min="0.4" max="0.9" step="0.005" />
-      <div id="snowOpVal" style="width:40px;text-align:right"></div>
-    </div>
-    <div class="setting-row">
-      <div style="width:120px;font-size:13px">Плотность снега</div>
-      <input type="range" id="snowDensity" class="range" min="1" max="20" step="1" />
-      <div id="snowDenVal" style="width:40px;text-align:right"></div>
-    </div>
-    <div class="setting-row" style="display:flex;align-items:center;gap:8px">
-      <div style="flex:1;font-size:13px">Спавн монеток</div>
-      <input type="checkbox" id="spawnCoinsToggle" checked />
-    </div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-      <div class="kbd">Space</div><div style="opacity:0.8">play/pause</div>
-      <div style="flex:1"></div>
-      <div class="kbd">S</div><div style="opacity:0.8">вкл/выкл снег</div>
-    </div>
-  </div>
-
-  <div class="toast" id="toast">Скопировано</div>
-  <script src="index_js.js"></script>
+  <audio id="audio" preload="none"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="index_js.js?v=2"></script>
 </body>
 </html>
-
