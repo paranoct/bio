@@ -3,154 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paranoct — bio</title>
+  <meta name="theme-color" content="#080a0c">
+  <meta name="description" content="paranoct — pwn, reverse engineering, C++ and Python">
+  <title>paranoct</title>
   <link rel="icon" href="avatar.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Manrope:wght@400;500;700;800&amp;family=Roboto+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="stylesheet" href="index_style.css?v=4">
+  <link rel="stylesheet" href="index_style.css">
 </head>
 <body>
-  <div class="page-bg" aria-hidden="true"></div>
-  <div class="page-overlay" aria-hidden="true"></div>
-  <div class="leaf-layer" id="leafLayer" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true"></div>
 
-  <div class="wrap">
-    <main class="card">
-      <section class="profile">
-        <div class="avatar">
-          <img src="avatar.jpg" alt="avatar" loading="lazy" width="176" height="176">
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Домой">paranoct</a>
+      <nav class="tabs" aria-label="Разделы сайта" role="tablist">
+        <button class="tab-button active" id="tab-home" type="button" role="tab" aria-selected="true" aria-controls="panel-home" data-tab="home">Домой</button>
+        <button class="tab-button" id="tab-olympiad" type="button" role="tab" aria-selected="false" aria-controls="panel-olympiad" data-tab="olympiad">Олимпиадный путь</button>
+      </nav>
+    </header>
+
+    <section class="tab-panel active" id="panel-home" role="tabpanel" aria-labelledby="tab-home" data-panel="home">
+      <section class="hero" aria-label="Профиль paranoct">
+        <div class="hero-copy">
+          <i class="hero-gear fa-solid fa-gear" aria-hidden="true"></i>
+          <p class="lede">pwn, systems<br class="desktop-break"> &amp; reverse engineering</p>
+          <p class="hero-note">Интересуюсь pwn и реверсом. Сейчас пишу проекты на C++</p>
         </div>
-
-        <div class="profile-copy">
-          <p class="eyebrow">bio / paranoct</p>
-          <h1 class="nick">paranoct</h1>
-          <div class="profile-details">
-            <p class="bio-text">
-            Привет! Я изучаю информационную безопасность. В 2026 году я стал призёром на заключительном этапе за 10 класс. В 11 классе собираюсь взять победителя. Так же ббшу по чуть-чуть
-            </p>
-            <img class="profile-gif" src="video.gif" alt="profile gif" loading="lazy">
-          </div>
-        </div>
-      </section>
-
-      <section class="content-top">
-        <div class="panel music-panel">
-          <div class="panel-head">
-            <h2><i class="fa-solid fa-wave-square"></i> Музыка</h2>
-            <button class="playlist-btn" id="playlistBtn" type="button" aria-expanded="false" aria-controls="playlistPanel">
-              <i class="fa-solid fa-list-ul"></i>
-              <span>Плейлист</span>
-            </button>
-          </div>
-
-          <p class="panel-subtitle" id="currentTrackTitle">Тёмный принц — Овердоз</p>
-
-          <div class="music-row">
-            <div class="music-controls">
-              <button class="control-btn" id="prevBtn" type="button" aria-label="Предыдущий трек">
-                <i class="fa-solid fa-backward-step"></i>
-              </button>
-              <button class="toggle-btn" id="toggleBtn" type="button" aria-label="Воспроизвести">
-                <i class="fa-solid fa-play"></i>
-              </button>
-              <button class="control-btn" id="nextBtn" type="button" aria-label="Следующий трек">
-                <i class="fa-solid fa-forward-step"></i>
-              </button>
-            </div>
-
-            <label class="volume-control" for="volumeRange">
-              <span class="volume-label">
-                <i class="fa-solid fa-volume-high"></i>
-                <span>Громкость</span>
-              </span>
-              <input id="volumeRange" class="volume-range" type="range" min="0" max="100" step="1" value="24">
-              <span class="volume-value" id="volumeValue">24%</span>
-            </label>
-          </div>
-
-          <div class="progress-row">
-            <button class="loop-btn" id="loopBtn" type="button" aria-pressed="false" aria-label="Повторять текущий трек">
-              <i class="fa-solid fa-repeat"></i>
-            </button>
-            <div class="progress" id="prog" role="progressbar" aria-label="Прогресс трека" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-              <i></i>
-            </div>
-            <div class="time-label" id="timeLabel">00:00 / 00:00</div>
-          </div>
-
-          <div class="playlist-panel" id="playlistPanel" aria-hidden="true"></div>
-        </div>
-
-        <div class="panel links-panel">
-          <h2><i class="fa-solid fa-seedling"></i> Ссылки</h2>
-
-          <div class="links">
-            <a href="https://github.com/paranoct" class="social-link" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-github"></i>
-              <div>
-                <strong>GitHub</strong>
-                <span>@paranoct</span>
-              </div>
-            </a>
-
-            <a href="https://t.me/korben_322" class="social-link" target="_blank" rel="noreferrer">
-              <i class="fa-brands fa-telegram"></i>
-              <div>
-                <strong>Telegram</strong>
-                <span>@korben_322</span>
-              </div>
-            </a>
-
-            <a href="https://standoff365.com/profile/paranoct/" class="social-link standoff-link" target="_blank" rel="noreferrer">
-              <i class="fa-solid fa-shield-halved"></i>
-              <div>
-                <strong>Standoff365</strong>
-                <span>profile / paranoct</span>
-              </div>
-            </a>
-          </div>
+        <div class="identity-mark" aria-label="Аватар">
+          <div class="avatar-frame"><img src="avatar.jpg" alt="Аватар paranoct" width="640" height="640"><span class="avatar-corner corner-tl"></span><span class="avatar-corner corner-br"></span></div>
         </div>
       </section>
 
-      <div class="panel terminal-panel">
-        <div class="terminal-head">
-          <div class="terminal-dots" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+      <div class="content-grid">
+        <section class="module links-module" aria-labelledby="links-title">
+          <div class="module-heading"><span class="module-index">01</span><h2 id="links-title">contact</h2><span class="heading-rule"></span></div>
+          <div class="link-list">
+            <a class="link-row" href="https://github.com/paranoct" target="_blank" rel="noreferrer">
+              <span class="link-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span><span class="link-copy"><strong>GitHub</strong><small>github.com / paranoct</small></span><i class="fa-solid fa-arrow-up-right-from-square link-arrow" aria-hidden="true"></i>
+            </a>
+            <a class="link-row" href="https://t.me/korben_322" target="_blank" rel="noreferrer">
+              <span class="link-icon telegram"><i class="fa-brands fa-telegram" aria-hidden="true"></i></span><span class="link-copy"><strong>Telegram</strong><small>t.me / korben_322</small></span><i class="fa-solid fa-arrow-up-right-from-square link-arrow" aria-hidden="true"></i>
+            </a>
+            <a class="link-row" href="https://standoff365.com/profile/paranoct/" target="_blank" rel="noreferrer">
+              <span class="link-icon standoff"><i class="fa-solid fa-crosshairs" aria-hidden="true"></i></span><span class="link-copy"><strong>Standoff 365</strong><small>bug bounty / paranoct</small></span><i class="fa-solid fa-arrow-up-right-from-square link-arrow" aria-hidden="true"></i>
+            </a>
           </div>
-          <span class="terminal-title">forest-shell</span>
-        </div>
+        </section>
 
-        <div class="terminal-output" id="terminalOutput" aria-live="polite"></div>
-
-        <form class="terminal-form" id="terminalForm" autocomplete="off">
-          <span class="terminal-prompt">paranoct@forest:~$</span>
-          <input
-            id="terminalInput"
-            class="terminal-input"
-            type="text"
-            name="command"
-            placeholder="help"
-            spellcheck="false"
-            autocapitalize="off"
-            autocomplete="off"
-          >
-        </form>
-
-        <p class="terminal-hint">Команды: help, about, status, track, play, pause, next, prev, volume 40, links, clear</p>
+        <section class="module projects-module" aria-labelledby="projects-title">
+          <div class="module-heading"><span class="module-index">02</span><h2 id="projects-title">проекты</h2><span class="heading-rule"></span></div>
+          <div class="project-list">
+            <a class="project-row" href="https://github.com/paranoct/lzha" target="_blank" rel="noreferrer">
+              <span class="project-mark"><i class="fa-solid fa-box-archive" aria-hidden="true"></i></span>
+              <div class="project-copy"><h3>LZHA · архиватор</h3><p>C++ · LZ77 · кодирование Хаффмана</p></div>
+              <i class="fa-solid fa-arrow-up-right-from-square link-arrow" aria-hidden="true"></i>
+            </a>
+            <a class="project-row" href="https://github.com/paranoct/chip8-emulator" target="_blank" rel="noreferrer">
+              <span class="project-mark"><i class="fa-solid fa-microchip" aria-hidden="true"></i></span>
+              <div class="project-copy"><h3>CHIP-8</h3><p>C++17 · SDL2 · эмулятор виртуальной машины</p></div>
+              <i class="fa-solid fa-arrow-up-right-from-square link-arrow" aria-hidden="true"></i>
+            </a>
+          </div>
+        </section>
       </div>
+    </section>
 
-      <div class="card-footer">
-        <div class="meta">&copy; 2026 paranoct • All rights reserved</div>
+    <section class="tab-panel" id="panel-olympiad" role="tabpanel" aria-labelledby="tab-olympiad" data-panel="olympiad" hidden>
+      <div class="section-intro"><span class="section-kicker">информационная безопасность</span><h1>Мой олимпиадный путь</h1></div>
+      <div class="timeline">
+        <article class="timeline-entry"><div><span class="timeline-date">лето 2025</span><h2>Узнал про информационную безопасность и начал заниматься</h2></div></article>
+        <article class="timeline-entry"><div><span class="timeline-date">осень 2025</span><h2>Попал на кружок Т-Образования</h2></div></article>
+        <article class="timeline-entry"><div><span class="timeline-date">февраль 2026</span><h2>Стал призёром регионального этапа ВсОШ по информационной безопасности</h2></div></article>
+        <article class="timeline-entry"><div><span class="timeline-date">конец февраля 2026</span><h2>Прошёл на заключительный этап ВсОШ по информационной безопасности</h2></div></article>
+        <article class="timeline-entry"><div><span class="timeline-date">28 марта 2026</span><h2>Стал призёром заключительного этапа ВсОШ по информационной безопасности</h2></div></article>
+        <div class="timeline-break"><span>планы</span></div>
+        <article class="timeline-entry future-entry"><div><span class="timeline-date">бакалавриат</span><h2>Планирую поступить в ВШЭ на бакалавриат по информационной безопасности</h2></div></article>
+        <article class="timeline-entry future-entry"><div><span class="timeline-date">дальше</span><h2>Хочу работать в ИБ-команде Яндекса, Positive Technologies или Т-Банка</h2></div></article>
       </div>
-    </main>
-  </div>
-
-  <audio id="audio" preload="none"></audio>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="index_js.js?v=2"></script>
+    </section>
+  </main>
+  <script src="index_js.js"></script>
 </body>
 </html>
